@@ -468,7 +468,40 @@ body *{
   border-radius:12px;
   font-size:14px;
 }
+/* ===== FIX MOBILE BILL TABLE ===== */
+@media (max-width: 768px){
 
+  .bill-preview table{
+    width: 100%;
+    table-layout: fixed; /* QUAN TRỌNG */
+  }
+
+  .bill-preview th,
+  .bill-preview td{
+    padding: 6px;
+    font-size: 13px;
+  }
+
+  /* Cột tên sản phẩm */
+  .bill-preview td:nth-child(1){
+    width: 55%;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+
+  /* Cột số lượng */
+  .bill-preview td:nth-child(2){
+    width: 15%;
+    text-align: center;
+  }
+
+  /* Cột giá */
+  .bill-preview td:nth-child(3){
+    width: 30%;
+    text-align: right;
+  }
+
+}
 /* Ẩn hóa đơn in */
 #printInvoice{
   display:none;
