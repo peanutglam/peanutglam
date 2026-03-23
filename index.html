@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý kho</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="p-4">
+  <div class="container">
+    <div class="site-header">
+
+<img src="https://i.postimg.cc/9fj9TQnJ/peanutglam.jpg" class="site-logo">
+
+<div class="site-title">
+<h1>Peanut Glam</h1>
+<p>Beauty & Cosmetics Management</p>
+</div>
+
+</div>
+     <h2 class="mb-4 section-title">
+  📦 Quản lý kho
+  <a href="https://docs.google.com/spreadsheets/d/1RgwHGBKqaIfdPmd1cBpN9Hdujs0YihRMgH72noeKKBI/edit?gid=824410059#gid=824410059" 
+     target="_blank" 
+     class="sheet-link">
+     📄 Sheet
+  </a>
+</h2>
+    <!-- CUSTOMER INFO -->
+    <h4>👤 Thông tin khách hàng</h4>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="mb-1">Người nhận đơn</label>
+        <select id="orderOwner" class="form-control">
+          <option>Chooseik</option>
+          <option>Peanut</option>
+          <option>Wasntvi</option>
+          <option>Tramy</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <input id="customerName" class="form-control" placeholder="Tên khách">
+      </div>
+
+      <div class="col-md-6">
+        <input id="customerPhone" class="form-control" placeholder="Số điện thoại">
+      </div>
+    </div>
+
+    <!-- ADDRESS -->
+    <h4>📍 Địa chỉ giao hàng</h4>
+
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <select id="province" class="form-control" onchange="loadDistricts(this.value)"></select>
+      </div>
+
+      <div class="col-md-4">
+        <select id="district" class="form-control"></select>
+      </div>
+
+      <div class="col-md-4">
+        <input id="street" class="form-control" placeholder="Số nhà / Đường">
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- SEARCH -->
+    <input
+      class="form-control mb-3"
+      placeholder="Tìm sản phẩm..."
+      onkeyup="search(this.value)"
+    >
+
+    <!-- SUPPLIER FILTER -->
+    <select
+      id="supplierFilter"
+      class="form-control mb-4"
+      onchange="filterSupplier(this.value)"
+    ></select>
+
+    <!-- PRODUCT TABLE -->
+    <div class="table-wrap product-wrap">
+      <table class="table table-bordered mb-0">
+        <thead id="thead"></thead>
+        <tbody id="table"></tbody>
+      </table>
+    </div>
+
+    <hr>
+
+    <!-- CART -->
+    <h4>🛒 Giỏ hàng</h4>
+
+    <div class="table-wrap cart-wrap">
+      <table class="table table-bordered mb-0">
+        <thead>
+          <tr>
+            <th>Sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>Xóa</th>
+          </tr>
+        </thead>
+        <tbody id="cart"></tbody>
+      </table>
+    </div>
+
+   <button id="saveBtn" class="btn btn-success mb-4 mt-3" onclick="confirmSave(false)">
+  Lưu đơn hàng
+</button>
+
+<button id="printBtn" class="btn btn-primary mb-4 mt-3" onclick="confirmSave(true)">
+  Lưu & In hóa đơn
+</button>
+  <!-- ================= PREVIEW HÓA ĐƠN ================= -->
+<div class="card p-3 mb-3">
+
+  <h5 class="mb-3" style="color:#e75480;">Xem trước hóa đơn</h5>
+
+  <div id="invoicePreview" class="invoice-preview">
+
+    <h4 style="text-align:center;">HÓA ĐƠN</h4>
+    <p><b>Người tạo đơn:</b> <span id="pvOwner"></span></p>
+    <p><b>Khách hàng:</b> <span id="pvName"></span></p>
+    <p><b>SĐT:</b> <span id="pvPhone"></span></p>
+    <p><b>Địa chỉ:</b> <span id="pvAddress"></span></p>
+    
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>Sản phẩm</th>
+          <th>SL</th>
+          <th>Giá</th>
+        </tr>
+      </thead>
+      <tbody id="pvItems"></tbody>
+    </table>
+
+    <h5 style="text-align:right;">
+      Tổng: <span id="pvTotal">0</span>đ
+    </h5>
+
+  </div>
+
+</div>
+    <hr>
+
+    <!-- ORDER HISTORY -->
+
+    <input 
+      type="text"
+      id="searchOrder"
+      placeholder="Tìm theo tên khách..."
+      oninput="searchOrders(this.value)"
+      class="form-control mb-2"
+    />
+     
+    <h4>📜 Lịch sử đơn hàng</h4>
+
+    <!-- NÚT XÓA NHIỀU ĐƠN (THÊM) -->
+    <button class="btn btn-danger mb-3" onclick="deleteSelectedOrders()">
+      🗑 Xóa đơn đã chọn
+    </button>
+     
+    <div class="table-wrap history-wrap">
+      <table class="table table-bordered mb-0">
+
+        <!-- HEADER CÓ CHECKBOX (THÊM) -->
+        <thead id="ordersHead">
+          <tr>
+            <th style="width:40px">
+              <input type="checkbox" onclick="toggleAllOrders(this)">
+            </th>
+            <th>STT</th>
+            <th>Tên</th>
+            <th>TK nhận đơn</th>
+            <th>Sản phẩm</th>
+            <th>Ngày</th>
+            <th>SĐT</th>
+            <th>Số lượng</th>
+            <th>Địa chỉ</th>
+            <th>Bill</th>
+          </tr>
+        </thead>
+
+        <tbody id="orders"></tbody>
+
+      </table>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+ <div id="printInvoice">
+
+<div class="invoice-print">
+
+<div class="print-header">
+<img src="https://i.postimg.cc/9fj9TQnJ/peanutglam.jpg" class="print-logo">
+<h2>PEANUTGLAM</h2>
+<p>Mỹ phẩm chính hãng</p>
+</div>
+
+<div class="bill-title">
+HÓA ĐƠN BÁN HÀNG
+</div>
+
+<div class="bill-info">
+<p><b>Khách:</b> <span id="invoiceCustomer"></span></p>
+<p><b>SĐT:</b> <span id="invoicePhone"></span></p>
+<p><b>Địa chỉ:</b> <span id="invoiceAddress"></span></p>
+<p id="rowOwner">Người lên đơn: <span id="invoiceOwner"></span></p>
+<p><b>Ngày:</b> <span id="invoiceDate"></span></p>
+</div>
+
+<table class="bill-table">
+
+<thead>
+<tr>
+<th>STT</th>
+<th>Sản phẩm</th>
+<th>SL</th>
+<th>Đơn giá</th>
+<th>Thành tiền</th>
+</tr>
+</thead>
+
+<tbody id="invoiceItems"></tbody>
+
+</table>
+
+<div class="bill-total">
+Tổng cộng: <span id="invoiceTotal"></span>
+</div>
+
+<div class="thanks">
+CẢM ƠN QUÝ KHÁCH
+</div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<title>Tra cứu đơn</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+padding:40px
+}
+
+.box{
+border:1px solid #ccc;
+padding:20px;
+max-width:500px;
+margin:auto
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Tra cứu đơn hàng</h2>
+
+<div id="order"></div>
+
+</div>
+
+<script>
+
+let params=new URLSearchParams(location.search)
+
+let id=params.get("id")
+
+document.getElementById("order").innerHTML=
+"Mã đơn: <b>"+id+"</b>"
+
+</script>
+
+</body>
+
+</html>
