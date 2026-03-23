@@ -558,6 +558,48 @@ body *{
   }
 
 }
+/* ================= */
+/* 🔥 HARD FIX INVOICE (CHẶN max-content) */
+/* ================= */
+
+#invoicePreview table{
+  width:100% !important;
+  max-width:100% !important;
+  table-layout:fixed !important;
+}
+
+#invoicePreview{
+  width:100%;
+  overflow:hidden;
+}
+
+/* FIX TEXT KHÔNG ĐẨY CỘT */
+#invoicePreview th,
+#invoicePreview td{
+  white-space:normal !important;
+  word-break:break-word !important;
+}
+
+/* CHIA CỘT CHUẨN */
+#invoicePreview th:nth-child(1),
+#invoicePreview td:nth-child(1){
+  width:55%;
+}
+
+#invoicePreview th:nth-child(2),
+#invoicePreview td:nth-child(2){
+  width:15%;
+  text-align:center;
+}
+
+#invoicePreview th:nth-child(3),
+#invoicePreview td:nth-child(3){
+  width:30%;
+  text-align:right;
+}
+#invoicePreview td{
+  overflow:hidden;
+}
 /* Ẩn hóa đơn in */
 #printInvoice{
   display:none;
