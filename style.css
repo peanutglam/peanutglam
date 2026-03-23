@@ -515,6 +515,49 @@ body *{
   }
 
 }
+/* ================= */
+/* 🔥 FORCE FIX BILL (OVERRIDE max-content) */
+/* ================= */
+
+.invoice-preview table{
+  width:100% !important;        /* đè max-content */
+  max-width:100% !important;
+  table-layout:fixed !important;
+}
+
+.invoice-preview{
+  overflow:hidden; /* chặn tràn */
+}
+
+/* fix text */
+.invoice-preview td,
+.invoice-preview th{
+  white-space:normal !important;
+  word-break:break-word;
+}
+
+/* mobile */
+@media (max-width:768px){
+
+  .invoice-preview table{
+    width:100% !important;
+  }
+
+  .invoice-preview td:nth-child(1){
+    width:55%;
+  }
+
+  .invoice-preview td:nth-child(2){
+    width:15%;
+    text-align:center;
+  }
+
+  .invoice-preview td:nth-child(3){
+    width:30%;
+    text-align:right;
+  }
+
+}
 /* Ẩn hóa đơn in */
 #printInvoice{
   display:none;
