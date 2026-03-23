@@ -1,1 +1,224 @@
 
+/* ================= */
+/* THEME COLOR */
+/* ================= */
+
+body{
+  background:#ffeaf3;
+  font-family:Arial, sans-serif;
+}
+
+/* ================= */
+/* HEADER */
+/* ================= */
+
+.site-header{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-bottom:25px;
+  background:white;
+  padding:15px 20px;
+  border-radius:14px;
+  box-shadow:0 4px 12px rgba(255,105,180,0.15);
+}
+
+.site-logo{
+  width:65px;
+  height:65px;
+  border-radius:14px;
+  object-fit:cover;
+}
+
+.site-title h1{
+  margin:0;
+  font-size:28px;
+  font-weight:800;
+  color:#e75480;
+}
+
+.site-title p{
+  margin:0;
+  font-size:14px;
+  color:#888;
+}
+
+.section-title{
+  color:#e75480;
+}
+
+img{
+  width:60px;
+  border-radius:6px;
+}
+
+.card{
+  border-radius:12px;
+}
+
+/* ================= */
+/* TABLE GLOBAL FIX */
+/* ================= */
+
+table{
+  background:white;
+  width:100%;              /* 🔥 FIX GỐC */
+  table-layout:auto;
+  border-collapse:collapse;
+}
+
+/* ================= */
+/* TABLE STYLE */
+/* ================= */
+
+.table-wrap{
+  overflow:auto;
+  border-radius:10px;
+  background:white;
+}
+
+.product-wrap{ max-height:760px; }
+.cart-wrap{ max-height:280px; }
+.history-wrap{ max-height:620px; }
+
+/* cell */
+
+.table th,
+.table td{
+  padding:6px 8px;
+  font-size:14px;
+  white-space:nowrap;
+}
+
+/* ================= */
+/* PRODUCT TABLE */
+/* ================= */
+
+.product-wrap table td:nth-child(2){
+  min-width:220px;
+  max-width:260px;
+  white-space:normal;
+}
+
+/* ================= */
+/* HISTORY TABLE */
+/* ================= */
+
+.history-wrap td:nth-child(5),
+.history-wrap th:nth-child(5){
+  min-width:180px;
+  white-space:normal;
+  word-break:break-word;
+}
+
+/* ================= */
+/* CART */
+/* ================= */
+
+.cart-wrap td:first-child{
+  white-space:normal;
+}
+
+/* ================= */
+/* HEADER TABLE */
+/* ================= */
+
+.table thead th{
+  position:sticky;
+  top:0;
+  background:#ffe4ef;
+  z-index:3;
+}
+
+/* ================= */
+/* BUTTON */
+/* ================= */
+
+button{
+  border-radius:10px;
+  transition:0.2s;
+}
+
+button:hover{
+  transform:translateY(-1px);
+}
+
+/* ================= */
+/* FORM */
+/* ================= */
+
+.form-control{
+  border-radius:12px;
+}
+
+/* ================= */
+/* PRINT */
+/* ================= */
+
+@media print{
+  body *{ visibility:hidden; }
+
+  #printInvoice,
+  #printInvoice *{
+    visibility:visible;
+  }
+
+  #printInvoice{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+  }
+}
+
+/* ================= */
+/* 🔥 FINAL FIX INVOICE */
+/* ================= */
+
+#invoicePreview{
+  width:100%;
+  overflow:hidden;
+}
+
+#invoicePreview table{
+  width:100%;
+  table-layout:fixed;
+}
+
+#invoicePreview th,
+#invoicePreview td{
+  white-space:normal;          /* 🔥 QUAN TRỌNG NHẤT */
+  word-break:break-word;
+}
+
+/* chia cột */
+#invoicePreview th:nth-child(1),
+#invoicePreview td:nth-child(1){
+  width:55%;
+}
+
+#invoicePreview th:nth-child(2),
+#invoicePreview td:nth-child(2){
+  width:15%;
+  text-align:center;
+}
+
+#invoicePreview th:nth-child(3),
+#invoicePreview td:nth-child(3){
+  width:30%;
+  text-align:right;
+}
+
+/* mobile */
+@media (max-width:768px){
+  #invoicePreview th,
+  #invoicePreview td{
+    font-size:12px;
+    padding:6px;
+  }
+}
+
+/* Ẩn hóa đơn in */
+#printInvoice{
+  display:none;
+}
