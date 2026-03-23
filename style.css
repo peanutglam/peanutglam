@@ -502,6 +502,58 @@ body *{
   }
 
 }
+/* ================= */
+/* 🔥 FIX BILL OVERFLOW MOBILE */
+/* ================= */
+
+.bill-preview{
+  width: 100%;
+  overflow-x: auto; /* cho phép scroll ngang nếu cần */
+}
+
+.bill-preview table{
+  width: 100%;
+  table-layout: fixed; /* QUAN TRỌNG */
+  border-collapse: collapse;
+}
+
+/* fix text */
+.bill-preview td{
+  word-break: break-word;
+}
+
+/* mobile */
+@media (max-width: 768px){
+
+  .bill-preview table{
+    min-width: 100%;
+  }
+
+  .bill-preview th,
+  .bill-preview td{
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  /* tên sản phẩm */
+  .bill-preview td:nth-child(1){
+    width: 55%;
+    white-space: normal;
+  }
+
+  /* số lượng */
+  .bill-preview td:nth-child(2){
+    width: 15%;
+    text-align: center;
+  }
+
+  /* giá */
+  .bill-preview td:nth-child(3){
+    width: 30%;
+    text-align: right;
+  }
+
+}
 /* Ẩn hóa đơn in */
 #printInvoice{
   display:none;
