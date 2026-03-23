@@ -468,87 +468,48 @@ body *{
   border-radius:12px;
   font-size:14px;
 }
-/* ===== FIX MOBILE BILL TABLE ===== */
-@media (max-width: 768px){
-
-  .bill-preview table{
-    width: 100%;
-    table-layout: fixed; /* QUAN TRỌNG */
-  }
-
-  .bill-preview th,
-  .bill-preview td{
-    padding: 6px;
-    font-size: 13px;
-  }
-
-  /* Cột tên sản phẩm */
-  .bill-preview td:nth-child(1){
-    width: 55%;
-    word-wrap: break-word;
-    white-space: normal;
-  }
-
-  /* Cột số lượng */
-  .bill-preview td:nth-child(2){
-    width: 15%;
-    text-align: center;
-  }
-
-  /* Cột giá */
-  .bill-preview td:nth-child(3){
-    width: 30%;
-    text-align: right;
-  }
-
-}
 /* ================= */
-/* 🔥 FIX BILL OVERFLOW MOBILE */
+/* 🔥 FIX BILL OVERFLOW (ĐÚNG CLASS) */
 /* ================= */
 
-.bill-preview{
+.invoice-preview{
   width: 100%;
-  overflow-x: auto; /* cho phép scroll ngang nếu cần */
+  overflow-x: auto;
 }
 
-.bill-preview table{
+.invoice-preview table{
   width: 100%;
-  table-layout: fixed; /* QUAN TRỌNG */
+  table-layout: fixed;
   border-collapse: collapse;
 }
 
-/* fix text */
-.bill-preview td{
+.invoice-preview td{
   word-break: break-word;
 }
 
 /* mobile */
 @media (max-width: 768px){
 
-  .bill-preview table{
-    min-width: 100%;
-  }
-
-  .bill-preview th,
-  .bill-preview td{
+  .invoice-preview th,
+  .invoice-preview td{
     font-size: 12px;
     padding: 6px;
   }
 
   /* tên sản phẩm */
-  .bill-preview td:nth-child(1){
+  .invoice-preview td:nth-child(1){
     width: 55%;
     white-space: normal;
   }
 
-  /* số lượng */
-  .bill-preview td:nth-child(2){
+  /* SL */
+  .invoice-preview td:nth-child(2){
     width: 15%;
     text-align: center;
   }
 
   /* giá */
-  .bill-preview td:nth-child(3){
+  .invoice-preview td:nth-child(3){
     width: 30%;
     text-align: right;
   }
